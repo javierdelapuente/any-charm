@@ -1,0 +1,10 @@
+name: Integration tests (opcli)
+
+on:
+  pull_request:
+
+jobs:
+  integration-test:
+    uses: javierdelapuente/operator-ci-poc/.github/workflows/integration-test.yaml@main
+    with:
+      artifacts-yaml: artifacts.yaml

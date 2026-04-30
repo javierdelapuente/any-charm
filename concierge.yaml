@@ -1,0 +1,15 @@
+juju:
+  model-defaults:
+    test-mode: "true"
+  channel: 3.6/stable
+providers:
+  lxd:
+    enable: true
+    bootstrap: true
+host:
+  packages:
+    - python3-pip
+  snaps:
+    charmcraft:
+    jq:
+    yq:

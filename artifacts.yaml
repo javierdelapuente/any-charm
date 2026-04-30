@@ -1,0 +1,8 @@
+version: 1
+rocks: []
+charms:
+- name: any-charm-k8s
+  charmcraft-yaml: charmcraft-any-charm-k8s.yaml
+- name: any-charm
+  charmcraft-yaml: charmcraft-any-charm.yaml
+snaps: []

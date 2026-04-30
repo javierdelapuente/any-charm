@@ -1,7 +1,38 @@
 # Copyright 2024 Canonical Ltd.
 # See LICENSE file for licensing details.
 
-name: any-charm
+name: any-charm-k8s
+type: charm
+platforms:
+  ubuntu@22.04:amd64:
+  ubuntu@22.04:arm64:
+  ubuntu@24.04:amd64:
+  ubuntu@24.04:arm64:
+  ubuntu@24.04:s390x:
+  ubuntu@24.04:ppc64el:
+parts:
+  charm: {}
+  wheelhouse:
+    plugin: nil
+    source: .
+    build-packages:
+      - python3-pip
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/wheelhouse
+      cp $CRAFT_PART_SRC/wheelhouse.txt $CRAFT_PART_INSTALL
+      for package in $(cat $CRAFT_PART_SRC/wheelhouse.txt)
+      do
+        pip wheel --wheel-dir=$CRAFT_PART_INSTALL/wheelhouse --prefer-binary $package
+      done
+containers:
+  any:
+    resource: any-image
+resources:
+  any-image:
+    type: oci-image
+    description: Any OCI image
+    upstream-source: ubuntu:latest
+
 description: A charm used to test other charms.
 summary: A charm used to test other charms.
 
@@ -1083,3 +1114,42 @@ requires:
     interface: haproxy-route-tcp
   require-haproxy-route-policy:
     interface: haproxy-route-policy
+
+config:
+  options:
+    src-overwrite:
+      description: |
+        A yaml/json encoded map of filenames and file contents that will write to the any-charm src directory before any charm event handling.
+        By overwriting the any_charm.py with a Python script that defines a class named AnyCharm inherited from the AnyCharm base, the any-charm behavior can be altered and extended.
+        The src directory has been added to the Python path, you can directly import any modules inside the src directory.
+        It's recommended to use this config with rpc action.
+        The charm.py is protected and can not be overwritten, and it's highly not recommended to overwrite any_charm_base.py.
+        Here's an example of overwriting the any_charm.py, you can use the rpc charm action to invoke the greeting method:
+          any_charm.py: |
+            from any_charm_base import AnyCharmBase
+        
+            class AnyCharm(AnyCharmBase):
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.framework.observe(self.on.update_status, self.update_status)
+        
+                def update_status(self, event):
+                    print("Hello, World!")
+        
+                def greeting(self):
+                    return "Hello"
+      default: "{}"
+      type: string
+    python-packages:
+      description: >-
+        newline-separated Python packages list to install in any-charm. 
+        The configuration format is a subset of requirements.txt specification, with each line a dependency compliant with PEP 508.
+        Some commonly used packages in charms like pydantic are packed with the any-charm. 
+        Which means that if the local cached package version matches the requirement, the required package can be installed directly from the cache.
+        The full list of pre-packaged Python packages can be found within the any-charm source code, specifically in the wheelhouse.txt file. 
+        For better chances to match versions available in the local cache, don't specify or pin the exact package version. 
+        For example, prefer using `jsonschema` instead of `jsonschema==4.21.0`.
+        And for pre-packed Python packages with different versions like pydantic v1 and v2, only pin the major version `pydantic~=1.0`.
+        Packages installed via this configuration has the lowest priority during the Python module resolution process.
+      default: ""
+      type: string

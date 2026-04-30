@@ -43,7 +43,15 @@ def series_fixture():
 
 
 @pytest_asyncio.fixture(scope="module")
-async def any_charm(ops_test: OpsTest, series: str):
+async def any_charm(request, ops_test: OpsTest, series: str, arch: str):
+    charm_files = request.config.getoption("--charm-file")
+    matching = [
+        f
+        for f in charm_files
+        if "any-charm_" in f and f"ubuntu@{series}" in f and arch in f
+    ]
+    if matching:
+        return matching[0]
     any_charm_path = await ops_test.build_charm(".")
     any_charm_build_dir = any_charm_path.parent
     any_charm_matching_series = list(any_charm_build_dir.rglob(f"*{series}*.charm"))

@@ -6,4 +6,6 @@ build/
 __pycache__/
 *.py[cod]
 .idea
-.vscode
+.vscode.opcli-spread-*/
+.spread-reuse.*.yaml
+artifacts-generated.yaml
