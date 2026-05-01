@@ -6,5 +6,7 @@ on:
 jobs:
   integration-test:
     uses: javierdelapuente/operator-ci-poc/.github/workflows/integration-test.yml@main
-    with:
-      artifacts-yaml: artifacts.yaml
+    permissions:
+      contents: read
+      packages: write
+      actions: read
