@@ -2,9 +2,5 @@ summary: integration tests
 
 execute: |
     cd "${SPREAD_PATH}"
-    # Strip _k8s suffix: MODULE may be test_charm_k8s but pytest keyword is test_charm.
-    # Workaround for https://github.com/javierdelapuente/operator-ci-poc/issues/NNN
-    # (opcli spread tasks should use `spread -list` output, not MODULE values).
-    PYTEST_MODULE="${MODULE%_k8s}"
-    PYTEST_CMD=$(opcli pytest expand -e "${TOX_ENV:-integration}" -- -k "$PYTEST_MODULE") || exit 1
+    PYTEST_CMD=$(opcli pytest expand -e "${TOX_ENV:-integration}" -- -k "$MODULE") || exit 1
     runuser -l "${SUDO_USER}" -c "cd \"${SPREAD_PATH}\" && $PYTEST_CMD"
