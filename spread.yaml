@@ -39,3 +39,6 @@ suites:
     - integration-test
     systems:
     - ubuntu-24.04
+    environment:
+      MODULE: test_demo
+      CONCIERGE: concierge-microk8s.yaml

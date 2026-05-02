@@ -1,9 +1,5 @@
 summary: demo integration test (amd64 only)
 
-environment:
-  MODULE: test_demo
-  CONCIERGE: concierge-microk8s.yaml
-
 execute: |
     cd "${SPREAD_PATH}"
     PYTEST_CMD=$(opcli pytest expand -e "${TOX_ENV:-integration}" -- -k "$MODULE") || exit 1
