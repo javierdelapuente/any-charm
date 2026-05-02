@@ -1,6 +1,0 @@
-summary: demo integration test (amd64 only)
-
-execute: |
-    cd "${SPREAD_PATH}"
-    PYTEST_CMD=$(opcli pytest expand -e "${TOX_ENV:-integration}" -- -k "$MODULE") || exit 1
-    runuser -l "${SUDO_USER}" -c "cd \"${SPREAD_PATH}\" && $PYTEST_CMD"
