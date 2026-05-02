@@ -6,11 +6,11 @@ charms:
   builds:
   - arch: amd64
   - arch: arm64
-    runner: ["ubuntu-24.04-arm64"]
+    runner: ["ubuntu-24.04-arm"]
 - name: any-charm
   charmcraft-yaml: charmcraft-any-charm.yaml
   builds:
   - arch: amd64
   - arch: arm64
-    runner: ["ubuntu-24.04-arm64"]
+    runner: ["ubuntu-24.04-arm"]
 snaps: []

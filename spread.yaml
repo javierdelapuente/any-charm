@@ -8,7 +8,7 @@ backends:
     - ubuntu-24.04:
         runner: ["ubuntu-latest"]
     - ubuntu-24.04-arm64:
-        runner: ["ubuntu-24.04-arm64"]
+        runner: ["ubuntu-24.04-arm"]
 environment:
   SUDO_USER: ubuntu
   LANG: C.UTF-8
