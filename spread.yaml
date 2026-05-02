@@ -40,5 +40,5 @@ suites:
     systems:
     - ubuntu-24.04
     environment:
-      MODULE: test_demo
-      CONCIERGE: concierge-microk8s.yaml
+      MODULE/test_demo: test_demo
+      CONCIERGE/test_demo: concierge-microk8s.yaml
