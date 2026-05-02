@@ -31,7 +31,11 @@ suites:
       MODULE/test_packages: test_packages
       MODULE/test_charm_k8s: test_charm
       MODULE/test_packages_k8s: test_packages
-      MODULE/test_demo: test_demo
       CONCIERGE/test_charm_k8s: concierge-microk8s.yaml
       CONCIERGE/test_packages_k8s: concierge-microk8s.yaml
-      CONCIERGE/test_demo: concierge-microk8s.yaml
+  tests/demo/:
+    summary: demo integration tests (amd64 only)
+    backends:
+    - integration-test
+    systems:
+    - ubuntu-24.04
