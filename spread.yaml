@@ -33,8 +33,8 @@ suites:
       MODULE/test_packages_k8s: test_packages
       CONCIERGE/test_charm_k8s: concierge-microk8s.yaml
       CONCIERGE/test_packages_k8s: concierge-microk8s.yaml
-  tests/demo/:
-    summary: demo integration tests (amd64 only)
+  tests/integration_amd64/:
+    summary: integration tests (amd64 only)
     backends:
     - integration-test
     systems:
