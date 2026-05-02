@@ -3,6 +3,14 @@ rocks: []
 charms:
 - name: any-charm-k8s
   charmcraft-yaml: charmcraft-any-charm-k8s.yaml
+  builds:
+  - arch: amd64
+  - arch: arm64
+    runner: ["ubuntu-24.04-arm64"]
 - name: any-charm
   charmcraft-yaml: charmcraft-any-charm.yaml
+  builds:
+  - arch: amd64
+  - arch: arm64
+    runner: ["ubuntu-24.04-arm64"]
 snaps: []
