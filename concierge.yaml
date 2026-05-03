@@ -6,17 +6,9 @@ juju:
 providers:
   lxd:
     enable: true
-  microk8s:
-    enable: true
     bootstrap: true
-    addons:
-      - hostpath-storage
-      - dns
-      - rbac
-      - metallb:10.64.140.43-10.64.140.49
 host:
   packages:
-    - gnome-keyring
     - python3-pip
   snaps:
     charmcraft:
