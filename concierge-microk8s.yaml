@@ -9,6 +9,7 @@ providers:
   microk8s:
     enable: true
     bootstrap: true
+    channel: 1.29-strict/stable
     addons:
       - hostpath-storage
       - dns
