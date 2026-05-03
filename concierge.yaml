@@ -3,6 +3,7 @@ juju:
     test-mode: "true"
     automatically-retry-hooks: "false"
   channel: 3.6/stable
+  extra-bootstrap-args: --config idle-connection-timeout=90s
 providers:
   lxd:
     enable: true
