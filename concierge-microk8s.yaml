@@ -1,6 +1,5 @@
 juju:
-  channel: "2.9/stable"
-  extra-bootstrap-args: "--config caas-image-repo=jujusolutions"
+  channel: "3/stable"
   model-defaults:
     test-mode: "true"
     automatically-retry-hooks: "false"
