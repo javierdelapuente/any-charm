@@ -1,7 +1,6 @@
 juju:
   model-defaults:
     test-mode: "true"
-    automatically-retry-hooks: "false"
   channel: 3.6/stable
 providers:
   lxd:
